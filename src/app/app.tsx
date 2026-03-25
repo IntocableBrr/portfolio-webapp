@@ -32,7 +32,7 @@ export function App() {
 
     if (!isError) {
       try {
-        const response = await fetch('http://localhost:5000/api/contact', {
+        const response = await fetch('https://cypv2sgp8z.us-east-2.awsapprunner.com/api/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

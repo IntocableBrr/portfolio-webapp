@@ -2,8 +2,22 @@
 // import styles from './app.module.scss';
 
 import { Route, Routes, Link } from 'react-router-dom';
-import { Button as MuiButton, ButtonProps, Avatar, TextField, Button, Alert, Box  } from '@mui/material';
+import { Button, Avatar, TextField, Alert, Box, Typography, IconButton, AppBar, Container, Tabs, Tab  } from '@mui/material';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import MarkunreadIcon from '@mui/icons-material/Markunread';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
+import InfoIcon from '@mui/icons-material/Info';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import styles from './app.module.scss'
 import { useState } from 'react';
+import { Height } from '@mui/icons-material';
+import Header from './components/header/header';
+import HomePage from './pages/home/home';
+import ProjectsPage from './pages/projects/projects';
 
 export function App() {
   const [email, setEmail] = useState('');
@@ -13,6 +27,9 @@ export function App() {
   const [messageTouched, setMessageTouched] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setLoading] = useState(false);
+  const [value, setValue] = useState(0);
+
 
   const validateEmail = (value: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,6 +49,7 @@ export function App() {
 
     if (!isError) {
       try {
+        setLoading(true);
         const response = await fetch('https://cypv2sgp8z.us-east-2.awsapprunner.com/api/contact', {
           method: 'POST',
           headers: {
@@ -60,67 +78,24 @@ export function App() {
       } catch (err) {
         setError('Something went wrong');
       }
+
+      setLoading(false);
     }
   };
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
       
   return (
     <>
-      {success && <Alert severity="success">{success}</Alert>}
-      {error && <Alert severity="error">{error}</Alert>}
-      <Box sx={{ justifyContent: "center", display: "flex"}}>
-        <Box 
-          component="form" 
-          onSubmit={handleSubmit}
-          sx={{ flexDirection: "column", display: "flex"}}
-        >
-          <Avatar 
-            alt='Jacob Rosa' 
-            src='jacob-avatar.jpg' 
-            sx={{ width: 250, height: 250}}
-          />
-          <TextField
-            fullWidth
-            label="Name"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-            sx={{ width: 250, marginTop: "20px"}}
-            value={name}
-          />
-          <TextField
-            error={showErrorEmail}
-            fullWidth
-            helperText={showErrorEmail ? 'Enter a valid email' : ''}
-            label="Email"
-            name="email"
-            onBlur={() => setEmailTouched(true)}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            sx={{ width: 250, marginTop: "20px"}}
-            type="email"
-            value={email}
-          />
-          <TextField
-            error={showErrorMessage}
-            fullWidth
-            helperText={showErrorMessage ? 'Message must be at least 10 characters' : ''}
-            label="Message"
-            multiline
-            onBlur={() => setMessageTouched(true)}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-            rows={4}
-            sx={{ width: 250, marginTop: "20px"}}
-            value={message}
-          />
-          <Button 
-            sx={{ width: 250, marginTop: "20px"}}
-            type="submit" 
-            variant="contained"
-          >
-            Send
-          </Button>
-        </Box>
-      </Box>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+      </Routes>
     </>
   );
 }

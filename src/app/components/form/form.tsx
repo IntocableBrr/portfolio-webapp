@@ -3,6 +3,7 @@ import { Alert, Avatar, Box, Button, IconButton, TextField, Typography } from '@
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
+import DownloadIcon  from '@mui/icons-material/Download';
 
 type FormProps = {
   title?: string;
@@ -125,62 +126,69 @@ const Form: FC<FormProps> = ({ title, subtitle }) => {
             <GitHubIcon sx={{ color: 'green'}} />
         </IconButton>
         <IconButton
-            component="a"
-            href="mailto:jacobjames1117@gmail.com"
+          component="a"
+          href="mailto:jacobjames1117@gmail.com"
         >
-            <MarkunreadIcon sx={{ color: 'green'}} />
+          <MarkunreadIcon sx={{ color: 'green'}} />
+        </IconButton>
+        <IconButton
+          component="a"
+          href="/jacob-rosa_Resume.pdf"
+          download
+        >
+          <DownloadIcon  sx={{ color: 'green'}} />
         </IconButton>
       </Box>
       {success && <Alert onClose={() => setSuccess('')} severity="success" sx={{ mt: '20px' }}>{success}</Alert>}
       {error && <Alert onClose={() => setError('')} severity="error" sx={{ mt: '20px' }}>{error}</Alert>}
       {!success && !error &&
-      <>
-      <TextField
-        disabled={isLoading}
-        fullWidth
-        label="Name"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        sx={{ width: 250, mt: '20px' }}
-      />
-      <TextField
-        disabled={isLoading}
-        error={showErrorEmail}
-        fullWidth
-        helperText={showErrorEmail ? 'Enter a valid email' : ''}
-        label="Email"
-        name="email"
-        onBlur={() => setEmailTouched(true)}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        sx={{ width: 250, mt: '20px' }}
-        type="email"
-        value={email}
-      />
-      <TextField
-        disabled={isLoading}
-        error={showErrorMessage}
-        fullWidth
-        helperText={showErrorMessage ? 'Message must be at least 10 characters' : ''}
-        label="Message"
-        multiline
-        onBlur={() => setMessageTouched(true)}
-        onChange={(e) => setMessage(e.target.value)}
-        required
-        rows={4}
-        sx={{ width: 250, margin: '20px 0 20px 0' }}
-        value={message}
-      />
-      <Button
-        loading={isLoading}
-        sx={{ width: 250, backgroundColor: 'green' }}
-        type="submit"
-        variant="contained"
-      >
-        Send
-      </Button>
-      </>
+        <>
+          <TextField
+            disabled={isLoading}
+            fullWidth
+            label="Name"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            sx={{ width: 250, mt: '20px' }}
+          />
+          <TextField
+            disabled={isLoading}
+            error={showErrorEmail}
+            fullWidth
+            helperText={showErrorEmail ? 'Enter a valid email' : ''}
+            label="Email"
+            name="email"
+            onBlur={() => setEmailTouched(true)}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            sx={{ width: 250, mt: '20px' }}
+            type="email"
+            value={email}
+          />
+          <TextField
+            disabled={isLoading}
+            error={showErrorMessage}
+            fullWidth
+            helperText={showErrorMessage ? 'Message must be at least 10 characters' : ''}
+            label="Message"
+            multiline
+            onBlur={() => setMessageTouched(true)}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+            rows={4}
+            sx={{ width: 250, margin: '20px 0 20px 0' }}
+            value={message}
+          />
+          <Button
+            loading={isLoading}
+            sx={{ width: 250, backgroundColor: 'green' }}
+            type="submit"
+            variant="contained"
+          >
+            Send
+          </Button>
+        </>
       }
     </Box>
   );

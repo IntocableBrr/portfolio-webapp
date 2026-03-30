@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 type ProjectsProps = {
   title?: string;
@@ -7,11 +7,10 @@ type ProjectsProps = {
 };
 
 const ProjectsPage: FC<ProjectsProps> = ({ title, subtitle }) => {
-      const [value, setValue] = useState(0);
 
   return (
-    <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 20, textAlign: 'center'}}>
-        <Typography variant='subtitle1'>I'm working on another FULL STACK webapp! Can't to tell you more about it.</Typography>
+    <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '72px 32px 72px 32px', textAlign: 'center'}}>
+        <Typography variant='subtitle1'>I'm working on another FULL STACK webapp! Can't wait to tell you more about it.</Typography>
     </Box>
   );
 };

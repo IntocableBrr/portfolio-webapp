@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = ({ title, subtitle }) => {
         paddingLeft: 6,
       }}
     >
-      <Typography sx={{ margin: "6px 32px 0 0", fontFamily: "monospace"}} variant="subtitle1">
+      <Typography sx={{ fontWeight: 800, margin: "6px 32px 0 0", fontFamily: "monospace"}} variant="subtitle1">
         Jacob 
         <br/>
         Rosa

@@ -24,9 +24,14 @@ const Header: FC<HeaderProps> = ({ title, subtitle }) => {
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: 'green',
-        paddingLeft: 8,
+        paddingLeft: 6,
       }}
     >
+      <Typography sx={{ margin: "6px 32px 0 0", fontFamily: "monospace"}} variant="subtitle1">
+        Jacob 
+        <br/>
+        Rosa
+      </Typography>
       <Tabs
         classes={{
           root: styles['portfolio__appbar-tabs-root'],

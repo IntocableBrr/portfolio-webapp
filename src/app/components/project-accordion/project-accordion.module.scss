@@ -1,0 +1,129 @@
+@use '../../../styles.scss' as *;
+
+.projectAccordionList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: stretch;
+}
+
+.accordion {
+  border-radius: 12px;
+  overflow: hidden;
+
+  &:global(.MuiAccordion-root) {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  &:global(.MuiAccordion-root::before) {
+    display: none;
+  }
+}
+
+.accordionSummary {
+  &:global(.MuiAccordionSummary-root) {
+    min-height: 92px;
+  }
+
+  &:global(.MuiAccordionSummary-root .MuiAccordionSummary-content) {
+    margin: 12px 0;
+  }
+}
+
+.repoTitle {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.accordionDetails {
+  padding-top: 0 !important;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.optionCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 16px;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.optionCardActive {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 1px #1976d2;
+}
+
+.optionButton {
+  margin-bottom: 8px;
+}
+
+.optionLabel {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.textContainer {
+  //border: 1px solid white;
+  border-radius: 12px;
+  padding: 0px;
+  min-height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContainerTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .optionsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.selectedView {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.selectedOptionCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: stretch;
+  min-width: 0px;
+  min-height: 100px;
+  border: 1px solid gray;
+  border-radius: 12px;
+  padding: 0px 32px;
+  //box-shadow: 0 0 0 1px gray;
+}

@@ -17,13 +17,15 @@ const Header: FC<HeaderProps> = ({ title, subtitle }) => {
     ? location.pathname
     : false;
 
+  const isProjectTab = location.pathname === '/projects'
+
   return (
     <AppBar
       position="sticky"
       sx={{
         display: 'flex',
         flexDirection: 'row',
-        backgroundColor: 'green',
+        backgroundColor: isProjectTab ? 'black': 'green',
         paddingLeft: 6,
       }}
     >

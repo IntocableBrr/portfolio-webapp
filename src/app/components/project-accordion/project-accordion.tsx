@@ -55,8 +55,9 @@ export default function ProjectAccordionList({projects,}: ProjectAccordionListPr
         return (
           <Accordion key={project.id} className={styles.accordion}>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<ExpandMoreIcon  sx={{ color: 'black' }}/>}
               className={styles.accordionSummary}
+              sx={{ '&:hover': { boxShadow: "inset 0 0 0 2px black", borderRadius: '8px', cursor: 'pointer' }}}
             >
               <Typography className={styles.repoTitle}>{project.repoName}</Typography>
             </AccordionSummary>
@@ -94,10 +95,6 @@ export default function ProjectAccordionList({projects,}: ProjectAccordionListPr
                       <CloseIcon />
                     </Box>
                     <Box className={styles.textContainer}>
-                      {/* <Typography className={styles.textContainerTitle}>
-                        {selectedOption.label}
-                      </Typography> */}
-
                       {selectedOption.content}
                     </Box>
                   </Box>

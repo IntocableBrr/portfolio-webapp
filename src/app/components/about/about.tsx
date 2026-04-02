@@ -50,7 +50,7 @@ const clickAction = {
           variant="subtitle2"
           sx={{
             minWidth: 250,
-            maxWidth: 400,
+            maxWidth: 584,
             mt: '20px',
             textAlign: 'left',
           }}

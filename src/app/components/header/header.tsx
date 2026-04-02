@@ -55,7 +55,6 @@ const Header: FC<HeaderProps> = ({ title, subtitle }) => {
           component={Link}
           to="/"
         />
-
         <Tab
           classes={{ selected: styles['portfolio__appbar-tab-selected'] }}
           sx={{ color: 'white' }}

@@ -5,11 +5,14 @@
   flex-direction: column;
   gap: 16px;
   width: stretch;
+  align-items: center;
 }
 
 .accordion {
   border-radius: 12px;
   overflow: hidden;
+  max-width: 1240px;
+  width: stretch;
 
   &:global(.MuiAccordion-root) {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -52,18 +55,22 @@
 }
 
 .optionCard {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100px;
-  border: 1px solid black;
+  //border: 1px solid black;
   border-radius: 12px;
   padding: 16px;
   transition:
     border-color 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
+  &:hover{
+    box-shadow: inset 0 0 0 2px black;
+  }
 }
 
 .optionCardActive {
@@ -115,6 +122,7 @@
 }
 
 .selectedOptionCard {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -122,8 +130,10 @@
   width: stretch;
   min-width: 0px;
   min-height: 100px;
-  border: 1px solid gray;
   border-radius: 12px;
   padding: 0px 32px;
-  //box-shadow: 0 0 0 1px gray;
+  &:hover{
+    //border: 2px solid green;
+    box-shadow: inset 0 0 0 2px black;
+  }
 }

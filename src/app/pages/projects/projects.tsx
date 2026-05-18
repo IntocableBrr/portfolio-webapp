@@ -2,12 +2,12 @@ import { Box, Typography, Link, Tooltip } from '@mui/material';
 import { FC, useState } from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ProjectAccordionList from '../../components/project-accordion/project-accordion';
-import StorefrontIcon from '@mui/icons-material/Storefront';
 import WorkIcon from '@mui/icons-material/Work';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import HikingOutlinedIcon from '@mui/icons-material/HikingOutlined';
 import InfoIcon from '@mui/icons-material/Info';
+import SportsMmaIcon from '@mui/icons-material/SportsMma';
 
 type ProjectsProps = {
   title?: string;
@@ -120,12 +120,12 @@ const handleCopy = async (text: string) => {
       ],
     },
     {
-      id: 'admin',
+      id: 'koc',
       repoName: 
       <Box sx={{ alignItems: "center", display: "flex"}}>
-        <StorefrontIcon sx={{ mr: ".25rem", color: "blue" }}/>
-        <Typography sx={{fontWeight: 800, color: "blue" }}>
-          {"POS (Point Of Sale)"}
+        <SportsMmaIcon sx={{ mr: ".25rem", color: "red" }}/>
+        <Typography sx={{fontWeight: 800, color: "red" }}>
+          {"KOC (KO Corner)"}
         </Typography>
       </Box>,
       options: [
@@ -133,7 +133,7 @@ const handleCopy = async (text: string) => {
           id: 'repo',
           icon: <HourglassEmptyIcon sx={{ color: "black" }}/>,
           label: 'Coming Soon',
-          content: <Typography>I'm working on a POS system to keep track of business</Typography>,
+          content: <Typography>I'm working on a boxing app</Typography>,
         }
       ],
     },

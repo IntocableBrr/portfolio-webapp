@@ -1,20 +1,59 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.scss';
-
-import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
 import HomePage from './pages/home/home';
-import ProjectsPage from './pages/projects/projects';
+import { Box, Typography } from '@mui/material';
 
 export function App() {
       
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-      </Routes>
+      <Header/>
+      <Box
+        sx={{
+          height: "calc(100vh - 72px)",
+          overflowY: 'auto',
+          scrollSnapType: 'y mandatory',
+        }}
+      >
+        <HomePage/>
+        <Box
+          sx={{
+            width: '100%',
+            height: "calc(100vh - 72px)",
+            flexShrink: 0,
+            scrollSnapAlign: 'start',
+            scrollSnapStop: 'always',
+          }}
+        >
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          {/* <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+          <Typography variant="h1">Page 1</Typography>
+          <Typography variant="h2">Subtitle</Typography> */}
+        </Box>
+        <Box
+          sx={{
+            width: '100%',
+            height: "calc(100vh - 72px)",
+            flexShrink: 0,
+            scrollSnapAlign: 'start',
+            scrollSnapStop: 'always',
+          }}
+        >
+          <Typography variant="h1">Page 2</Typography>
+          <Typography variant="h2">Subtitle</Typography>
+        </Box>
+      </Box>
     </>
   );
 }

@@ -26,20 +26,6 @@ export function App() {
         >
           <Typography variant="h1">Page 1</Typography>
           <Typography variant="h2">Subtitle</Typography>
-          {/* <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography>
-          <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography>
-          <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography>
-          <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography>
-          <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography>
-          <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography>
-          <Typography variant="h1">Page 1</Typography>
-          <Typography variant="h2">Subtitle</Typography> */}
         </Box>
         <Box
           sx={{

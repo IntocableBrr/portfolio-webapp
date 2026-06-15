@@ -1,27 +1,44 @@
-import { FC } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
-import Form from '../../components/form/form';
-import About from '../../components/about/about';
+import ShapeGrid from '../../components/shape-grid/ShapeGrid';
 
-type HomeProps = {
-  title?: string;
-  subtitle?: string;
-};
-
-const HomePage: FC<HomeProps> = ({ title, subtitle }) => {
-
+const HomePage= () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        flexWrap: 'wrap',
-        pt: 2,
+        position: 'relative',
+        flexShrink: 0,
+        scrollSnapAlign: 'start',
+        scrollSnapStop: 'always',
       }}
     >
-      <About />
-      <Form />
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+        }}
+      >
+        <ShapeGrid />
+      </Box>
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: "calc(100vh - 72px)",
+        }}
+      >
+        <Typography variant="h1">Hero/Home Page!</Typography>
+        <Typography variant="h2">Subtitle</Typography>
+      </Box>
     </Box>
   );
 };

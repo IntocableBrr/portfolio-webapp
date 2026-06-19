@@ -34,10 +34,11 @@ const HomePage= () => {
           justifyContent: 'center',
           width: '100%',
           height: "calc(100vh - 72px)",
+          color: '#ffffff',
         }}
       >
-        <Typography variant="h1">Hero/Home Page!</Typography>
-        <Typography variant="h2">Subtitle</Typography>
+        <Typography variant="h1">Hero Page!</Typography>
+        <Typography variant="h5">Subtitle</Typography>
       </Box>
     </Box>
   );

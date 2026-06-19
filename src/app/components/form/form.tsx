@@ -111,7 +111,7 @@ const Form: FC<FormProps> = ({ title, subtitle }) => {
       >
         <IconButton
             component="a"
-            href="https://www.linkedin.com/in/jacob787/"
+            href="https://www.linkedin.com/in/jacobrosadev/"
             target="_blank"
             rel="noopener noreferrer"
         >
@@ -127,7 +127,7 @@ const Form: FC<FormProps> = ({ title, subtitle }) => {
         </IconButton>
         <IconButton
           component="a"
-          href="mailto:jacobjames1117@gmail.com"
+          href="mailto:jacobrosadev@gmail.com"
         >
           <MarkunreadIcon sx={{ color: 'green'}} />
         </IconButton>

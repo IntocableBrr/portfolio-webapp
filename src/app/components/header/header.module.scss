@@ -1,19 +1,105 @@
 @use '../../../styles.scss' as *;
 
-.portfolio {
-    &__appbar-tab-selected {
-        color: white !important;
-        //background: red !important;
-        border-color: white !important;
-    }
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 86px;
+  padding: 0 clamp(1.25rem, 5.5vw, 5.5rem);
+  background: #030303;
+  box-shadow: 0 8px 22px rgba(184, 58, 58, 0.42);
+}
 
-    &__appbar-tabs-indicator {
-        //color: black !important;
-        background-color: white !important
-    }
+.logoLink {
+  display: block;
+  flex: 0 1 225px;
+  min-width: 0;
+  line-height: 0;
 
-    &__appbar-tab-icon {
-        height: 20px !important;
-        width: 20px!important;
-    }
-} 
+  :global(.jacob-rosa-logo) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(0.5rem, 2.2vw, 2.25rem);
+}
+
+.navigationButton {
+  position: relative;
+  isolation: isolate;
+  min-width: clamp(82px, 7vw, 112px);
+  padding: 0.65rem 1rem;
+  border: 0;
+  background: transparent;
+  color: #f5f2f2;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  span {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #d85757;
+    outline-offset: 4px;
+  }
+}
+
+.active {
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: 0;
+    content: '';
+    clip-path: polygon(14% 0, 86% 0, 100% 50%, 86% 100%, 14% 100%, 0 50%);
+  }
+
+  &::before {
+    inset: 0;
+    background: #b83a3a;
+  }
+
+  &::after {
+    inset: 2px;
+    background: #030303;
+  }
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .logoLink {
+    flex-basis: 176px;
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.15rem;
+  }
+
+  .navigationButton {
+    min-width: 0;
+    padding: 0.65rem clamp(0.55rem, 3vw, 1rem);
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+  }
+}

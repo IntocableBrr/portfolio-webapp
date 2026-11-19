@@ -1,72 +1,48 @@
-import { FC } from 'react';
-import { AppBar, Tab, Tabs, Typography } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import type { FC } from 'react';
+import JacobRosaLogo from '../jacob-rosa-logo/jacob-rosa-logo';
 import styles from './header.module.scss';
-import InfoIcon from '@mui/icons-material/Info';
-import ConstructionIcon from '@mui/icons-material/Construction';
+
+export type SectionId = 'home' | 'work' | 'about' | 'contact';
 
 type HeaderProps = {
-  title?: string;
-  subtitle?: string;
+  activeSection: SectionId;
+  onNavigate: (section: SectionId) => void;
 };
 
-const Header: FC<HeaderProps> = ({ title, subtitle }) => {
-  const location = useLocation();
+const navigation: { id: SectionId; label: string }[] = [
+  { id: 'home', label: 'Home' },
+  { id: 'work', label: 'My work' },
+  { id: 'about', label: 'About me' },
+  { id: 'contact', label: 'Contact' },
+];
 
-  const currentTab = ['/', '/projects'].includes(location.pathname)
-    ? location.pathname
-    : false;
-
-  const isProjectTab = location.pathname === '/projects'
-
-  return (
-    <AppBar
-      position="sticky"
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: isProjectTab ? 'black': 'green',
-        paddingLeft: 6,
+const Header: FC<HeaderProps> = ({ activeSection, onNavigate }) => (
+  <header className={styles.header}>
+    <a
+      className={styles.logoLink}
+      href="#home"
+      aria-label="Jacob Rosa, Home"
+      onClick={(event) => {
+        event.preventDefault();
+        onNavigate('home');
       }}
     >
-      <Typography sx={{ fontWeight: 800, margin: "6px 32px 0 0", fontFamily: "monospace"}} variant="subtitle1">
-        Jacob 
-        <br/>
-        Rosa
-      </Typography>
-      <Tabs
-        classes={{
-          root: styles['portfolio__appbar-tabs-root'],
-          indicator: styles['portfolio__appbar-tabs-indicator'],
-        }}
-        value={currentTab}
-        aria-label="navigation tabs"
-      >
-        <Tab
-          classes={{ selected: styles['portfolio__appbar-tab-selected'] }}
-          sx={{ color: 'white' }}
-          icon={<InfoIcon />}
-          label={
-            <Typography sx={{ margin: 0 }} variant="subtitle2">
-              ReadMe
-            </Typography>
-          }
-          value="/"
-          component={Link}
-          to="/"
-        />
-        <Tab
-          classes={{ selected: styles['portfolio__appbar-tab-selected'] }}
-          sx={{ color: 'white' }}
-          icon={<ConstructionIcon />}
-          label={<Typography variant="subtitle2">My Work</Typography>}
-          value="/projects"
-          component={Link}
-          to="/projects"
-        />
-      </Tabs>
-    </AppBar>
-  );
-};
+      <JacobRosaLogo />
+    </a>
+    <nav className={styles.navigation} aria-label="Main navigation">
+      {navigation.map(({ id, label }) => (
+        <button
+          key={id}
+          type="button"
+          className={`${styles.navigationButton} ${activeSection === id ? styles.active : ''}`}
+          aria-current={activeSection === id ? 'page' : undefined}
+          onClick={() => onNavigate(id)}
+        >
+          <span>{label}</span>
+        </button>
+      ))}
+    </nav>
+  </header>
+);
 
 export default Header;

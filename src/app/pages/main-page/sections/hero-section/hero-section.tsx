@@ -1,10 +1,25 @@
 import { Typography } from '@mui/material';
-import { AppButton, AppShapeGrid, type SectionId } from '../../../../components';
+import {
+  AppButton,
+  AppPill,
+  AppShapeGrid,
+  type SectionId,
+} from '../../../../components';
 import styles from './hero-section.module.scss';
 
 export type HeroSectionProps = {
   onNavigate: (section: SectionId) => void;
 };
+
+const technologies = [
+  'React',
+  'TypeScript',
+  'Node.js',
+  'Python',
+  'Java',
+  'PostgreSQL',
+  'AWS',
+];
 
 const HeroSection = ({ onNavigate }: HeroSectionProps) => (
   <section id="home" data-section-id="home" className={styles.heroSection}>
@@ -13,11 +28,10 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => (
     </div>
     <div className={styles.heroContent}>
       <Typography component="h1" className={styles.heroHeading}>
-        Hello World
+        Details matter. So does delivery.
       </Typography>
       <Typography component="p" className={styles.heroDescription}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        I ask the questions early, catch the details that are easy to miss, and build secure, maintainable software that makes life easier for the people using it.
       </Typography>
       <AppButton
         variant="primary"
@@ -28,11 +42,11 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => (
       </AppButton>
     </div>
     <ul className={styles.technologyList} aria-label="Technologies">
-      {['HTMLS', 'CSS', 'Javascript', 'Node.js', 'React', 'Git', 'Github'].map(
-        (technology) => (
-          <li key={technology}>{technology}</li>
-        )
-      )}
+      {technologies.map((technology) => (
+        <li key={technology}>
+          <AppPill>{technology}</AppPill>
+        </li>
+      ))}
     </ul>
   </section>
 );

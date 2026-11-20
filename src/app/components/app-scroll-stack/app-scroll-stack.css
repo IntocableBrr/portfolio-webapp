@@ -39,15 +39,15 @@
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   position: relative;
-  background: #170D0D;
-  border: 1px solid #241b1b;
-  /* border: 1px solid #b83A3A; */
+  /* background: #170D0D; */
+  background: linear-gradient(to right, #340D0D, #170D0D);
+  /* border: 1px solid #241b1b; */
+  border: 1px solid #b83A3A;
 
-  &:hover {
-    background: linear-gradient(to right, #340D0D, #170D0D);
+  /* &:hover {
     box-shadow: 0 0 30px rgba(184, 58, 58, 1);
     border: none;
-  }
+  } */
 }
 
 .scroll-stack-end {

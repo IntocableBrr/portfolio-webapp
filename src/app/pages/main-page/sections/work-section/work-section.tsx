@@ -39,6 +39,10 @@ const WorkSection = ({ onNavigate }: WorkSectionProps) => (
         <Typography variant="h5">Card 1</Typography>
         <p>This is the first card in the stack</p>
       </AppScrollStackItem>
+      <AppScrollStackItem>
+        <Typography variant="h5">Card 2</Typography>
+        <p>This is the second card in the stack</p>
+      </AppScrollStackItem>
     </AppScrollStack>
     <AppButton
       variant="primary"

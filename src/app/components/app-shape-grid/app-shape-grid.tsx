@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { RoseLogo } from '../rose-logo';
 import './app-shape-grid.css';
 
 export type ShapeGridDirection = 'right' | 'left' | 'up' | 'down' | 'diagonal';
@@ -31,6 +32,7 @@ const AppShapeGrid = ({
   className = '',
 }: AppShapeGridProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const roseLogoRef = useRef<SVGSVGElement>(null);
   const requestRef = useRef<number | null>(null);
   const numSquaresX = useRef<number>(0);
   const numSquaresY = useRef<number>(0);
@@ -50,8 +52,31 @@ const AppShapeGrid = ({
 
     const isHex = shape === 'hexagon';
     const isTri = shape === 'triangle';
-    const hexHoriz = squareSize * 1.5;
-    const hexVert = squareSize * Math.sqrt(3);
+    const hexHoriz = squareSize * Math.sqrt(3);
+    const hexVert = squareSize * 1.5;
+    const roseSize = squareSize * 1.8;
+    const roseSvg = roseLogoRef.current;
+    const roseImage = roseSvg ? new Image() : null;
+
+    if (roseSvg && roseImage) {
+      // Load the reusable SVG once so canvas can draw it with each cell's opacity.
+      const svg = new XMLSerializer().serializeToString(roseSvg);
+      roseImage.src = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+    }
+
+    const getHexLayout = () => {
+      const rowShift = Math.floor(gridOffset.current.y / hexVert);
+      const offsetX =
+        ((gridOffset.current.x % hexHoriz) + hexHoriz) % hexHoriz;
+      const offsetY =
+        ((gridOffset.current.y % hexVert) + hexVert) % hexVert;
+
+      return {
+        offsetY,
+        getRowX: (row: number) =>
+          offsetX + ((row + rowShift) % 2 !== 0 ? hexHoriz / 2 : 0),
+      };
+    };
 
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth;
@@ -64,7 +89,7 @@ const AppShapeGrid = ({
       ctx.beginPath();
 
       for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 3) * i;
+        const angle = (Math.PI / 3) * i - Math.PI / 2;
         const vx = cx + size * Math.cos(angle);
         const vy = cy + size * Math.sin(angle);
 
@@ -146,31 +171,30 @@ const AppShapeGrid = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (isHex) {
-        const colShift = Math.floor(gridOffset.current.x / hexHoriz);
-        const offsetX =
-          ((gridOffset.current.x % hexHoriz) + hexHoriz) % hexHoriz;
-        const offsetY =
-          ((gridOffset.current.y % hexVert) + hexVert) % hexVert;
+        const { offsetY, getRowX } = getHexLayout();
 
         const cols = Math.ceil(canvas.width / hexHoriz) + 3;
         const rows = Math.ceil(canvas.height / hexVert) + 3;
 
-        for (let col = -2; col < cols; col++) {
-          for (let row = -2; row < rows; row++) {
-            const cx = col * hexHoriz + offsetX;
-            const cy =
-              row * hexVert +
-              ((col + colShift) % 2 !== 0 ? hexVert / 2 : 0) +
-              offsetY;
+        for (let row = -2; row < rows; row++) {
+          const rowX = getRowX(row);
+          const cy = row * hexVert + offsetY;
+
+          for (let col = -2; col < cols; col++) {
+            const cx = col * hexHoriz + rowX;
 
             const cellKey = `${col},${row}`;
             const alpha = cellOpacities.current.get(cellKey);
 
-            if (alpha) {
+            if (alpha && roseImage?.complete && roseImage.naturalWidth > 0) {
               ctx.globalAlpha = alpha;
-              drawHex(cx, cy, squareSize);
-              ctx.fillStyle = hoverFillColor;
-              ctx.fill();
+              ctx.drawImage(
+                roseImage,
+                cx - roseSize / 2,
+                cy - roseSize / 2,
+                roseSize,
+                roseSize
+              );
               ctx.globalAlpha = 1;
             }
 
@@ -290,8 +314,8 @@ const AppShapeGrid = ({
 
     const updateAnimation = () => {
       const effectiveSpeed = Math.max(speed, 0.1);
-      const wrapX = isHex ? hexHoriz * 2 : squareSize;
-      const wrapY = isHex ? hexVert : isTri ? squareSize * 2 : squareSize;
+      const wrapX = isHex ? hexHoriz : squareSize;
+      const wrapY = isHex ? hexVert * 2 : isTri ? squareSize * 2 : squareSize;
 
       switch (direction) {
         case 'right':
@@ -349,19 +373,22 @@ const AppShapeGrid = ({
       const mouseY = event.clientY - rect.top;
 
       if (isHex) {
-        const colShift = Math.floor(gridOffset.current.x / hexHoriz);
-        const offsetX =
-          ((gridOffset.current.x % hexHoriz) + hexHoriz) % hexHoriz;
-        const offsetY =
-          ((gridOffset.current.y % hexVert) + hexVert) % hexVert;
-        const adjustedX = mouseX - offsetX;
-        const adjustedY = mouseY - offsetY;
+        const { offsetY, getRowX } = getHexLayout();
+        const firstRow = Math.floor((mouseY - offsetY) / hexVert);
+        const nearestInRow = (row: number) => {
+          const rowX = getRowX(row);
+          const col = Math.round((mouseX - rowX) / hexHoriz);
+          const dx = mouseX - (col * hexHoriz + rowX);
+          const dy = mouseY - (row * hexVert + offsetY);
 
-        const col = Math.round(adjustedX / hexHoriz);
-        const rowOffset = (col + colShift) % 2 !== 0 ? hexVert / 2 : 0;
-        const row = Math.round((adjustedY - rowOffset) / hexVert);
-
-        updateHoveredCell({ x: col, y: row });
+          return { cell: { x: col, y: row }, distance: dx * dx + dy * dy };
+        };
+        // The nearest center across the two staggered rows owns the pointer.
+        const first = nearestInRow(firstRow);
+        const second = nearestInRow(firstRow + 1);
+        updateHoveredCell(
+          first.distance <= second.distance ? first.cell : second.cell
+        );
       } else if (isTri) {
         const halfW = squareSize / 2;
         const offsetX = ((gridOffset.current.x % halfW) + halfW) % halfW;
@@ -442,7 +469,16 @@ const AppShapeGrid = ({
     hoverTrailAmount,
   ]);
 
-  return <canvas ref={canvasRef} className={`shapegrid-canvas ${className}`} />;
+  return (
+    <>
+      <canvas ref={canvasRef} className={`shapegrid-canvas ${className}`} />
+      {shape === 'hexagon' && (
+        <div hidden>
+          <RoseLogo ref={roseLogoRef} width={64} height={64} />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default AppShapeGrid;

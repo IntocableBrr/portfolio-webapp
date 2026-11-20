@@ -1,9 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
-import Header, { type SectionId } from '../../header/header';
-import AboutSection from '../../sections/about-section/about-section';
-import ContactSection from '../../sections/contact-section/contact-section';
-import HeroSection from '../../sections/hero-section/hero-section';
-import WorkSection from '../../sections/work-section/work-section';
+import { AppHeader, type SectionId } from '../../components';
+import { AboutSection, ContactSection, HeroSection, WorkSection } from './sections';
 import styles from './main-page.module.scss';
 
 const sectionOrder: SectionId[] = ['home', 'work', 'about', 'contact'];
@@ -57,7 +54,7 @@ const MainPage = () => {
 
   return (
     <div className={styles.appShell}>
-      <Header activeSection={activeSection} onNavigate={navigateToSection} />
+      <AppHeader activeSection={activeSection} onNavigate={navigateToSection} />
       <main
         ref={scrollerRef}
         className={styles.sectionScroller}

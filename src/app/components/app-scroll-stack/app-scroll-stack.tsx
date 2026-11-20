@@ -1,18 +1,18 @@
 import React, { useLayoutEffect, useRef, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import Lenis from 'lenis';
-import './ScrollStack.css';
+import './app-scroll-stack.css';
 
-export interface ScrollStackItemProps {
+export interface AppScrollStackItemProps {
   itemClassName?: string;
   children: ReactNode;
 }
 
-export const ScrollStackItem: React.FC<ScrollStackItemProps> = ({ children, itemClassName = '' }) => (
+export const AppScrollStackItem: React.FC<AppScrollStackItemProps> = ({ children, itemClassName = '' }) => (
   <div className={`scroll-stack-card ${itemClassName}`.trim()}>{children}</div>
 );
 
-interface ScrollStackProps {
+export interface AppScrollStackProps {
   className?: string;
   children: ReactNode;
   itemDistance?: number;
@@ -28,7 +28,7 @@ interface ScrollStackProps {
   onStackComplete?: () => void;
 }
 
-const ScrollStack: React.FC<ScrollStackProps> = ({
+const AppScrollStack: React.FC<AppScrollStackProps> = ({
   children,
   className = '',
   itemDistance = 100,
@@ -330,4 +330,4 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   );
 };
 
-export default ScrollStack;
+export default AppScrollStack;

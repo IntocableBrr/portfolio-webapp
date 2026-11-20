@@ -1,17 +1,15 @@
 import { Typography } from '@mui/material';
-import CustomButton from '../../custom-button/custom-button';
-import type { SectionId } from '../../header/header';
-import ShapeGrid from '../../shape-grid/ShapeGrid';
+import { AppButton, AppShapeGrid, type SectionId } from '../../../../components';
 import styles from './hero-section.module.scss';
 
-type HeroSectionProps = {
+export type HeroSectionProps = {
   onNavigate: (section: SectionId) => void;
 };
 
 const HeroSection = ({ onNavigate }: HeroSectionProps) => (
   <section id="home" data-section-id="home" className={styles.heroSection}>
     <div className={styles.gridBackground} aria-hidden="true">
-      <ShapeGrid />
+      <AppShapeGrid />
     </div>
     <div className={styles.heroContent}>
       <Typography component="h1" className={styles.heroHeading}>
@@ -21,13 +19,13 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => (
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </Typography>
-      <CustomButton
+      <AppButton
         variant="primary"
         className={styles.workButton}
         onClick={() => onNavigate('work')}
       >
         Check out my work
-      </CustomButton>
+      </AppButton>
     </div>
     <ul className={styles.technologyList} aria-label="Technologies">
       {['HTMLS', 'CSS', 'Javascript', 'Node.js', 'React', 'Git', 'Github'].map(

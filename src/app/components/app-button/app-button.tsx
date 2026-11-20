@@ -1,13 +1,13 @@
 import Button, { type ButtonProps } from '@mui/material/Button';
 import type { AnchorHTMLAttributes } from 'react';
-import styles from './custom-button.module.scss';
+import styles from './app-button.module.scss';
 
-type CustomButtonProps = Omit<ButtonProps, 'variant'> &
+export type AppButtonProps = Omit<ButtonProps, 'variant'> &
   Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'download'> & {
     variant: 'navigation' | 'primary' | 'secondary';
   };
 
-const CustomButton = ({ variant, className = '', ...props }: CustomButtonProps) => (
+const AppButton = ({ variant, className = '', ...props }: AppButtonProps) => (
   <Button
     disableRipple={variant === 'navigation'}
     {...props}
@@ -15,4 +15,4 @@ const CustomButton = ({ variant, className = '', ...props }: CustomButtonProps) 
   />
 );
 
-export default CustomButton;
+export default AppButton;

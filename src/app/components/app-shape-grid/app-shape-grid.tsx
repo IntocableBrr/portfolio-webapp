@@ -1,26 +1,26 @@
 import { useEffect, useRef } from 'react';
-import './ShapeGrid.css';
+import './app-shape-grid.css';
 
-type Direction = 'right' | 'left' | 'up' | 'down' | 'diagonal';
-type Shape = 'square' | 'circle' | 'hexagon' | 'triangle';
+export type ShapeGridDirection = 'right' | 'left' | 'up' | 'down' | 'diagonal';
+export type ShapeGridShape = 'square' | 'circle' | 'hexagon' | 'triangle';
 
 type GridCell = {
   x: number;
   y: number;
 };
 
-type ShapeGridProps = {
-  direction?: Direction;
+export type AppShapeGridProps = {
+  direction?: ShapeGridDirection;
   speed?: number;
   borderColor?: string;
   squareSize?: number;
   hoverFillColor?: string;
-  shape?: Shape;
+  shape?: ShapeGridShape;
   hoverTrailAmount?: number;
   className?: string;
 };
 
-const ShapeGrid = ({
+const AppShapeGrid = ({
   direction = 'diagonal',
   speed = 0,
   borderColor = '#2d0b0b',
@@ -29,7 +29,7 @@ const ShapeGrid = ({
   shape = 'hexagon',
   hoverTrailAmount = 5,
   className = '',
-}: ShapeGridProps) => {
+}: AppShapeGridProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const requestRef = useRef<number | null>(null);
   const numSquaresX = useRef<number>(0);
@@ -445,4 +445,4 @@ const ShapeGrid = ({
   return <canvas ref={canvasRef} className={`shapegrid-canvas ${className}`} />;
 };
 
-export default ShapeGrid;
+export default AppShapeGrid;

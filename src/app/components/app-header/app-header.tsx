@@ -1,11 +1,11 @@
 import type { FC } from 'react';
-import CustomButton from '../custom-button/custom-button';
+import AppButton from '../app-button/app-button';
 import JacobRosaLogo from '../jacob-rosa-logo/jacob-rosa-logo';
-import styles from './header.module.scss';
+import styles from './app-header.module.scss';
 
 export type SectionId = 'home' | 'work' | 'about' | 'contact';
 
-type HeaderProps = {
+export type AppHeaderProps = {
   activeSection: SectionId;
   onNavigate: (section: SectionId) => void;
 };
@@ -17,7 +17,7 @@ const navigation: { id: SectionId; label: string }[] = [
   { id: 'contact', label: 'Contact' },
 ];
 
-const Header: FC<HeaderProps> = ({ activeSection, onNavigate }) => (
+const AppHeader: FC<AppHeaderProps> = ({ activeSection, onNavigate }) => (
   <header className={styles.header}>
     <a
       className={styles.logoLink}
@@ -32,17 +32,17 @@ const Header: FC<HeaderProps> = ({ activeSection, onNavigate }) => (
     </a>
     <nav className={styles.navigation} aria-label="Main navigation">
       {navigation.map(({ id, label }) => (
-        <CustomButton
+        <AppButton
           key={id}
           variant="navigation"
           aria-current={activeSection === id ? 'page' : undefined}
           onClick={() => onNavigate(id)}
         >
           {label}
-        </CustomButton>
+        </AppButton>
       ))}
     </nav>
   </header>
 );
 
-export default Header;
+export default AppHeader;

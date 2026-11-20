@@ -1,0 +1,61 @@
+.workSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.workHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
+  width: 100%;
+  margin: 1.5rem 0 1rem;
+  padding-inline: clamp(1rem, 6vw, 5.5rem) clamp(1rem, 3.5vw, 3.5rem);
+  text-align: left;
+}
+
+.workHeader .sectionHeading {
+  font-size: clamp(2rem, 6.5vw, 3.75rem);
+  font-weight: 500;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  margin-inline-start: auto;
+}
+
+.headerActions .githubButton {
+  padding: 0.5rem;
+  color: inherit;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+  }
+
+  :global(.MuiSvgIcon-root) {
+    font-size: clamp(1.25rem, 3.4vw, 1.875rem);
+  }
+}
+
+.workStack {
+  width: 67%;
+}
+
+.workSection .contactButton {
+  margin: 1rem 0 2rem;
+}
+
+@media (max-width: 700px) {
+  .workStack {
+    width: 92%;
+  }
+}

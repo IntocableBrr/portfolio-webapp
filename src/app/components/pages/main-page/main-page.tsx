@@ -1,14 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
-import Header, { type SectionId } from '../../components/header/header';
-import AboutSection from '../../components/about-section/about-section';
-import ContactSection from '../../components/contact-section/contact-section';
-import HomeHero from '../../components/home-hero/home-hero';
-import WorkSection from '../../components/work-section/work-section';
-import styles from './home.module.scss';
+import Header, { type SectionId } from '../../header/header';
+import AboutSection from '../../sections/about-section/about-section';
+import ContactSection from '../../sections/contact-section/contact-section';
+import HeroSection from '../../sections/hero-section/hero-section';
+import WorkSection from '../../sections/work-section/work-section';
+import styles from './main-page.module.scss';
 
 const sectionOrder: SectionId[] = ['home', 'work', 'about', 'contact'];
 
-const HomePage = () => {
+const MainPage = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState<SectionId>('home');
 
@@ -64,8 +64,8 @@ const HomePage = () => {
         onScroll={updateActiveSection}
         aria-label="Portfolio sections"
       >
-        <HomeHero onNavigate={navigateToSection} />
-        <WorkSection />
+        <HeroSection onNavigate={navigateToSection} />
+        <WorkSection onNavigate={navigateToSection} />
         <AboutSection />
         <ContactSection />
       </main>
@@ -73,4 +73,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MainPage;

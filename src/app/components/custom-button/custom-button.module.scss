@@ -1,0 +1,134 @@
+.button {
+  --corner: 10%;
+  --shape: polygon(
+    var(--corner) 0,
+    calc(100% - var(--corner)) 0,
+    100% 50%,
+    calc(100% - var(--corner)) 100%,
+    var(--corner) 100%,
+    0 50%
+  );
+
+  &.navigation,
+  &.primary,
+  &.secondary {
+    position: relative;
+    isolation: isolate;
+    text-transform: none;
+  }
+
+  &.navigation {
+    --corner: 14%;
+    --button-border: #b83a3a;
+    --button-fill: #030303;
+    --border-width: 2px;
+
+    min-width: clamp(82px, 7vw, 112px);
+    padding: 0.65rem 1rem;
+    border-radius: 0;
+    background: transparent;
+    color: #f5f2f2;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+
+    &:hover {
+      background: transparent;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #d85757;
+      outline-offset: 4px;
+    }
+  }
+
+  &.primary {
+    min-width: 310px;
+    padding: 0.6rem 2rem;
+    clip-path: var(--shape);
+    background: rgba(137, 39, 43, 0.88);
+    box-shadow: inset 0 0 0 2px #b83a3a;
+    color: #fff;
+    font-size: 1.45rem;
+    line-height: 1.4;
+
+    &:hover {
+      background: #a53237;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+  }
+
+  &.secondary {
+    --button-border: #555050;
+    --button-fill: #211d1d;
+    --border-width: 1px;
+
+    min-width: clamp(6.25rem, 16vw, 9rem);
+    min-height: clamp(2.125rem, 4.8vw, 2.75rem);
+    padding: 0.25rem 0.9rem;
+    border-radius: 0;
+    background: transparent;
+    color: #fff;
+    font-size: clamp(0.75rem, 1.8vw, 1rem);
+    line-height: 1.4;
+
+    &:hover {
+      --button-fill: #342e2e;
+
+      background: transparent;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    :global(.MuiButton-startIcon) {
+      margin-right: 0.35rem;
+      margin-left: 0;
+
+      > :first-child {
+        font-size: clamp(1rem, 2.4vw, 1.25rem);
+      }
+    }
+  }
+
+  &.secondary,
+  &.navigation[aria-current='page'] {
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: -1;
+      clip-path: var(--shape);
+      content: '';
+    }
+
+    &::before {
+      inset: 0;
+      background: var(--button-border);
+    }
+
+    &::after {
+      inset: var(--border-width);
+      background: var(--button-fill);
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .button.navigation {
+    min-width: 0;
+    padding: 0.65rem clamp(0.55rem, 3vw, 1rem);
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+  }
+
+  .button.primary {
+    min-width: min(290px, 86vw);
+    font-size: 1.15rem;
+  }
+}

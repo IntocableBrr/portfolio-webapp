@@ -1,14 +1,15 @@
-import { Button, Typography } from '@mui/material';
-import ShapeGrid from '../shape-grid/ShapeGrid';
-import type { SectionId } from '../header/header';
-import styles from '../../pages/home/home.module.scss';
+import { Typography } from '@mui/material';
+import CustomButton from '../../custom-button/custom-button';
+import type { SectionId } from '../../header/header';
+import ShapeGrid from '../../shape-grid/ShapeGrid';
+import styles from './hero-section.module.scss';
 
-type HomeHeroProps = {
+type HeroSectionProps = {
   onNavigate: (section: SectionId) => void;
 };
 
-const HomeHero = ({ onNavigate }: HomeHeroProps) => (
-  <section id="home" data-section-id="home" className={styles.homeSection}>
+const HeroSection = ({ onNavigate }: HeroSectionProps) => (
+  <section id="home" data-section-id="home" className={styles.heroSection}>
     <div className={styles.gridBackground} aria-hidden="true">
       <ShapeGrid />
     </div>
@@ -20,12 +21,13 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => (
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </Typography>
-      <Button
+      <CustomButton
+        variant="primary"
         className={styles.workButton}
         onClick={() => onNavigate('work')}
       >
         Check out my work
-      </Button>
+      </CustomButton>
     </div>
     <ul className={styles.technologyList} aria-label="Technologies">
       {['HTMLS', 'CSS', 'Javascript', 'Node.js', 'React', 'Git', 'Github'].map(
@@ -37,4 +39,4 @@ const HomeHero = ({ onNavigate }: HomeHeroProps) => (
   </section>
 );
 
-export default HomeHero;
+export default HeroSection;

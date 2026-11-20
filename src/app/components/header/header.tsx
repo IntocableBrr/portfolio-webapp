@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import CustomButton from '../custom-button/custom-button';
 import JacobRosaLogo from '../jacob-rosa-logo/jacob-rosa-logo';
 import styles from './header.module.scss';
 
@@ -31,15 +32,14 @@ const Header: FC<HeaderProps> = ({ activeSection, onNavigate }) => (
     </a>
     <nav className={styles.navigation} aria-label="Main navigation">
       {navigation.map(({ id, label }) => (
-        <button
+        <CustomButton
           key={id}
-          type="button"
-          className={`${styles.navigationButton} ${activeSection === id ? styles.active : ''}`}
+          variant="navigation"
           aria-current={activeSection === id ? 'page' : undefined}
           onClick={() => onNavigate(id)}
         >
-          <span>{label}</span>
-        </button>
+          {label}
+        </CustomButton>
       ))}
     </nav>
   </header>

@@ -1,17 +1,17 @@
 import { Typography } from '@mui/material';
-import styles from '../../pages/home/home.module.scss';
+import styles from './about-section.module.scss';
 
-const ContactSection = () => (
-  <section id="contact" data-section-id="contact" className={styles.contentSection}>
+const AboutSection = () => (
+  <section id="about" data-section-id="about" className={styles.contentSection}>
     <div className={styles.placeholderContent}>
       <Typography component="h2" variant="h1">
-        Contact
+        About me
       </Typography>
       <Typography component="p" variant="h2">
-        Contact text
+        About me text
       </Typography>
     </div>
   </section>
 );
 
-export default ContactSection;
+export default AboutSection;

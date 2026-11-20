@@ -34,51 +34,6 @@
   gap: clamp(0.5rem, 2.2vw, 2.25rem);
 }
 
-.navigationButton {
-  position: relative;
-  isolation: isolate;
-  min-width: clamp(82px, 7vw, 112px);
-  padding: 0.65rem 1rem;
-  border: 0;
-  background: transparent;
-  color: #f5f2f2;
-  font: inherit;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-
-  span {
-    position: relative;
-    z-index: 1;
-    white-space: nowrap;
-  }
-
-  &:focus-visible {
-    outline: 2px solid #d85757;
-    outline-offset: 4px;
-  }
-}
-
-.active {
-  &::before,
-  &::after {
-    position: absolute;
-    z-index: 0;
-    content: '';
-    clip-path: polygon(14% 0, 86% 0, 100% 50%, 86% 100%, 14% 100%, 0 50%);
-  }
-
-  &::before {
-    inset: 0;
-    background: #b83a3a;
-  }
-
-  &::after {
-    inset: 2px;
-    background: #030303;
-  }
-}
-
 @media (max-width: 700px) {
   .header {
     flex-wrap: wrap;
@@ -95,11 +50,5 @@
     width: 100%;
     justify-content: space-between;
     gap: 0.15rem;
-  }
-
-  .navigationButton {
-    min-width: 0;
-    padding: 0.65rem clamp(0.55rem, 3vw, 1rem);
-    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
   }
 }
